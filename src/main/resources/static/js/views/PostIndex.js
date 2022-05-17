@@ -20,7 +20,7 @@ export default function PostIndex(props) {
 }
 
 
-PostsEvent();
+// PostsEvent();
 
 export function PostsEvent() {
     postEventListener();
@@ -38,6 +38,7 @@ function postEventListener() {
             title: postTitle,
             content: postContent
         }
+        console.log(newPost + " was created as a post.")
         fetch("api/posts/", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},

@@ -2,13 +2,12 @@ package com.example.restblog.web;
 
 
 import com.example.restblog.data.Post;
-import io.swagger.v3.oas.annotations.Parameter;
-import javafx.geometry.Pos;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostController {
@@ -56,14 +55,8 @@ public class PostController {
     }
 
     @PutMapping("{id}")
-    public void updatePost(@Parameter Long id, @RequestBody Post post){
-        Post postToUpdate = new Post();
-        postToUpdate.setId(id);
-        postToUpdate.setTitle(post.getTitle());
-        postToUpdate.setContent(post.getContent());
-        System.out.println(postToUpdate.getId());
-        System.out.println(postToUpdate.getTitle());
-        System.out.println(postToUpdate.getContent());
+    public void updatePost(@PathVariable Long id, @RequestBody Post post){
+        System.out.println("Updated post.");
     }
 
     @DeleteMapping("{id}")

@@ -1,5 +1,3 @@
-
-
 export default function PostIndex(props) {
     return `
         <header xmlns="http://www.w3.org/1999/html">
@@ -10,7 +8,7 @@ export default function PostIndex(props) {
                 ${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3>
 <p id="post-content">${post.content}</p>
 <button style="background-color: cornflowerblue; color: WHITE" id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button>
-<button style="background-color: red; color: WHITE" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
+<button style="background-color: orangered; color: WHITE" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
 </div>`).join('')}   
             </div>
             <hr>

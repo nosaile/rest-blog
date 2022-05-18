@@ -13,7 +13,8 @@ export default function Login(props) {
     <input id="username" name="username" type="text"/>
     <label for="password">Password</label>
     <input id="password" name="password" type="password"/>
-    <input id="login-btn" type="submit" value="Log In"/>
+    <hr>
+    <input style="background-color: green; color: white" id="login-btn" type="submit" value="Log In"/>
 </form>
 </body>
 </html>`;

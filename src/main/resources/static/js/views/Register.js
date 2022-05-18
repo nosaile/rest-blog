@@ -20,7 +20,7 @@ export default function Register(props) {
     <label for="password">Password</label>
     <input id="password" name="password" type="password"/>
     <hr>
-    <input id="register-btn" type="submit" value="Register"/>
+    <input style="background-color: green; color: white" id="register-btn" type="submit" value="Register"/>
 </form>
 </body>
 </html>`;
@@ -35,8 +35,6 @@ export function RegisterEvent() {
             username: document.querySelector("#username").value,
             email: document.querySelector("#email").value,
             password: document.querySelector("#password").value,
-            createdAt: null,
-            role: "USER"
         }
         console.log(user)
         console.log("got to register event")

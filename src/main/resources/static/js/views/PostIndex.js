@@ -1,3 +1,5 @@
+import createView from "../createView.js";
+
 export default function PostIndex(props) {
     return `
         <header xmlns="http://www.w3.org/1999/html">
@@ -5,14 +7,18 @@ export default function PostIndex(props) {
         </header>
         <main>
             <div id="posts-container">
-                ${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3><p id="post-content">${post.content}</pclass><button id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button><button id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button></div>`).join('')}   
+                ${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3>
+<p id="post-content">${post.content}</p>
+<button style="background-color: cornflowerblue; color: WHITE" id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button>
+<button style="background-color: red; color: WHITE" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
+</div>`).join('')}   
             </div>
             <div id="form-container">
             <form id="submit-form">
             <input type="text" id="create-post-title" placeholder="Title">
             <br>
             <textarea placeholder="Content" id="create-post-content"></textarea>
-            <button id="submit-post">submit post</button>
+            <button style="background-color: green; color: WHITE" id="submit-post">submit post</button>
             </form>
 </div>
         </main>
@@ -45,6 +51,7 @@ function postEventListener() {
             body: JSON.stringify(newPost)
         }).then(res => {
             console.log("Request complete! response:", res);
+            // createView("/posts")
         });
     })
 }

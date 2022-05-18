@@ -1,6 +1,5 @@
 package com.example.restblog.data;
 
-import javax.management.relation.Role;
 import java.util.Date;
 
 public class User {
@@ -73,5 +72,17 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", createdAt=" + createdAt +
+                ", role=" + role +
+                '}';
     }
 }

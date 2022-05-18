@@ -69,26 +69,3 @@ function setTokens(responseData) {
 
 
 }
-
-export function RegisterEvent() {
-    console.log("entered addRegisterEvent")
-    document.querySelector("#register-btn").addEventListener("click", function () {
-        let obj = {
-            username: document.querySelector("#username").value,
-            password: document.querySelector("#password").value,
-            grant_type: 'password'
-        }
-        console.log("got to register event")
-        let request = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: obj
-        };
-
-        fetch("http://localhost:8080/api/users", request)
-            .then((response) => {
-                console.log(response.status)
-                createView("/");
-            });
-    });
-}

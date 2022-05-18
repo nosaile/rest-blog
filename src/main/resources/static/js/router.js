@@ -5,8 +5,8 @@ import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
 import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
-import Register from "./views/Register.js";
-import RegisterEvent from "./auth.js";
+import Register, {RegisterEvent} from "./views/Register.js";
+
 
 /**
  * Returns the route object for a specific route based on the given URI

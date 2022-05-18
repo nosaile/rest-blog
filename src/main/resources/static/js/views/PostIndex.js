@@ -1,4 +1,4 @@
-import createView from "../createView.js";
+
 
 export default function PostIndex(props) {
     return `
@@ -13,12 +13,14 @@ export default function PostIndex(props) {
 <button style="background-color: red; color: WHITE" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
 </div>`).join('')}   
             </div>
+            <hr>
             <div id="form-container">
+            <h1>New Post</h1>
             <form id="submit-form">
             <input type="text" id="create-post-title" placeholder="Title">
             <br>
             <textarea placeholder="Content" id="create-post-content"></textarea>
-            <button style="background-color: green; color: WHITE" id="submit-post">submit post</button>
+            <button style="background-color: green; color: WHITE" id="submit-post">submit</button>
             </form>
 </div>
         </main>

@@ -1,18 +1,27 @@
 package com.example.restblog.data;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 public class User {
+
+
+
     private long id;
     private String username;
     private String email;
     private String password;
     private LocalDateTime createdAt = LocalDateTime.now();
     private Role role = Role.USER;
+    private Collection<Post> posts;
 
     public enum Role {USER, ADMIN}
 
     ;
+
+    public User(Collection<Post> posts){
+        this.posts = posts;
+    }
 
     public User(long id, String username, String email, String password, LocalDateTime createdAt, Role role) {
         this.id = id;
@@ -73,6 +82,15 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
+
 
     @Override
     public String toString() {

@@ -2,15 +2,18 @@ package com.example.restblog.web;
 
 
 import com.example.restblog.data.Post;
+import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
-public class PostController {
+public class PostController{
     ArrayList<Post> posts = new ArrayList<>();
     Post newPost1 = new Post(1L, "The first Post.", "This will be the very first post in the list.");
     Post newPost2 = new Post(2L, "The second Post.", "This will be the second post in the list.");
@@ -19,6 +22,10 @@ public class PostController {
 
 
     public ArrayList<Post> setList() {
+//        newPost1.setUser(new User(6L, "user6", "6@mail.com", "1234567890", LocalDateTime.now(), User.Role.USER));
+//        newPost2.setUser(new User(6L, "user6", "6@mail.com", "1234567890", LocalDateTime.now(), User.Role.USER));
+//        newPost3.setUser(new User(7L, "7thUSER", "7@mail.com", "ytfcvbh", LocalDateTime.now(), User.Role.USER));
+//        newPost4.setUser(new User(8L, "ATEthUser", "8@mail.com", "passwoo0ord", LocalDateTime.now(), User.Role.USER));
         posts.add(newPost1);
         posts.add(newPost2);
         posts.add(newPost3);
@@ -55,12 +62,12 @@ public class PostController {
     }
 
     @PutMapping("{id}")
-    public void updatePost(@PathVariable Long id, @RequestBody Post post){
+    public void updatePost(@PathVariable Long id, @RequestBody Post post) {
 //        System.out.println("Updated post.");
     }
 
     @DeleteMapping("{id}")
-    public void deletePost(@PathVariable Long id){
+    public void deletePost(@PathVariable Long id) {
 //        System.out.println("Deleting post with id: " + id);
     }
 }

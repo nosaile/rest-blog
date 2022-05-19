@@ -1,7 +1,7 @@
 package com.example.restblog.web;
 
 
-import com.example.restblog.data.Post;
+
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,12 +9,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
-public class UsersController {
+public class UsersController{
 
     ArrayList<User> users = new ArrayList<>();
     User user1 = new User(1, "nosaile", "1email@web.com", "pass1", LocalDateTime.now(), User.Role.ADMIN);
@@ -31,6 +32,7 @@ public class UsersController {
         users.add(user5);
         return users;
     }
+
     @GetMapping
     public ArrayList<User> getAll() {
         users.removeAll(users);

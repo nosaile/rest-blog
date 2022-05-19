@@ -1,10 +1,12 @@
 package com.example.restblog.web;
 
 
-
+import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -21,15 +23,18 @@ public class UsersController {
     User user4 = new User(4, "player1", "4email@web.com", "pass4", LocalDateTime.now(), User.Role.USER);
     User user5 = new User(5, "player2", "5email@web.com", "pass5", LocalDateTime.now(), User.Role.USER);
 
-    @GetMapping
-    public ArrayList<User> getAll() {
+    public ArrayList<User> setList() {
         users.add(user1);
         users.add(user2);
         users.add(user3);
         users.add(user4);
         users.add(user5);
-
         return users;
+    }
+    @GetMapping
+    public ArrayList<User> getAll() {
+        users.removeAll(users);
+        return setList();
     }
 
     @GetMapping("/{id}")
@@ -83,8 +88,22 @@ public class UsersController {
     }
 
     @PutMapping("{id}")
-    public void updatePost(@PathVariable Long id, @RequestBody User user) {
+    public void updateUser(@PathVariable Long id, @RequestBody User user) {
         System.out.println("Updated user with id: " + id + ".");
+        System.out.println(user);
+    }
+
+    @PutMapping("{id}/updatePassword")
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
+        System.out.println("Updated user with id: " + id + ".");
+        User newpass = getById(id);
+        newpass.setPassword(newPassword);
+        System.out.println(newpass);
+    }
+
+    @PutMapping("/username/{username}")
+    public void updateUsername(@PathVariable String username, @RequestBody User user) {
+        System.out.println("Updated user with username: " + username + ".");
         System.out.println(user);
     }
 

@@ -1,7 +1,9 @@
 package com.example.restblog.data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class User {
 
@@ -13,23 +15,23 @@ public class User {
     private String password;
     private LocalDateTime createdAt = LocalDateTime.now();
     private Role role = Role.USER;
-    private Collection<Post> posts;
+    private List<Post> posts;
 
     public enum Role {USER, ADMIN}
 
     ;
 
-    public User(Collection<Post> posts){
+    public User(List<Post> posts){
         this.posts = posts;
     }
 
-    public User(long id, String username, String email, String password, LocalDateTime createdAt, Role role) {
+    public User(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.createdAt = createdAt;
-        this.role = role;
+//        this.createdAt = createdAt;
+//        this.role = role;
     }
     public User(){
 
@@ -83,11 +85,11 @@ public class User {
         this.role = role;
     }
 
-    public Collection<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Collection<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 

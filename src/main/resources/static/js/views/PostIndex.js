@@ -5,6 +5,7 @@ export default function PostIndex(props) {
         </header>
         <main>
             <div id="posts-container">
+           
                 ${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3>
 <p id="post-content">${post.content}</p>
 <button style="background-color: cornflowerblue; color: WHITE" id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button>
@@ -18,7 +19,7 @@ export default function PostIndex(props) {
             <input type="text" id="create-post-title" placeholder="Title">
             <br>
             <textarea placeholder="Content" id="create-post-content"></textarea>
-            <button style="background-color: green; color: WHITE" id="submit-post">submit</button>
+            <button style="background-color: seagreen; color: WHITE" id="submit-post">submit</button>
             </form>
 </div>
         </main>

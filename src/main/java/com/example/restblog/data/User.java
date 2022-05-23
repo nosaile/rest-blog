@@ -1,22 +1,28 @@
 package com.example.restblog.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+
+@Entity
+@Table(name = "users")
 public class User {
 
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String email;
     private String password;
     private LocalDateTime createdAt = LocalDateTime.now();
+    @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
     private List<Post> posts;
-
     public enum Role {USER, ADMIN}
 
     ;

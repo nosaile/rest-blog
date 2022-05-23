@@ -16,6 +16,7 @@ CREATE TABLE users
     password VARCHAR(60)  NOT NULL,
     email    VARCHAR(200) NOT NULL,
     role     VARCHAR(32)  NOT NULL,
+    created_at DATETIME NOT NULL,
     PRIMARY KEY (id)
 
 );

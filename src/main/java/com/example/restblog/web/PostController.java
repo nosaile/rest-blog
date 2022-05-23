@@ -42,6 +42,7 @@ public class PostController{
 
     @PostMapping
     public void createPost(@RequestBody Post postToAdd) {
+        userService.addPost(postToAdd);
         System.out.println(postToAdd);
     }
 
@@ -64,6 +65,6 @@ public class PostController{
 
     @DeleteMapping("{id}")
     public void deletePost(@PathVariable Long id) {
-//
+    userService.deletePostById(id);
     }
 }

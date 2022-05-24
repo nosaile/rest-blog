@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @CrossOrigin
@@ -19,17 +20,17 @@ public class UsersController {
     private final UserService userService;
 
     public UsersController(UserService userService) {
-        this.userService = userService; // injection point of UserService
+        this.userService = userService;
     }
 
-    public ArrayList<User> setList() {
-        userService.setUserList();
-        return (ArrayList<User>) userService.getUserList();
-    }
+//    public ArrayList<User> setList() {
+//        userService.setUserList();
+//        return (ArrayList<User>) userService.getUserList();
+//    }
 
     @GetMapping
-    public ArrayList<User> getAll() {
-        return setList();
+    public List<User> getAll() {
+        return  userService.getUserList();
     }
 
     @GetMapping("/{id}")
@@ -50,6 +51,7 @@ public class UsersController {
     @PostMapping
     public void createUser(@RequestBody User newUser){
         userService.getUserList().add(newUser);
+        userService.usersRepository.save(newUser);
     }
 
 //    @PostMapping("")
@@ -95,6 +97,7 @@ public class UsersController {
     @DeleteMapping("{id}")
     public void deleteUser(@PathVariable Long id) {
         System.out.println("Deleted user with id: " + id);
+        userService.deleteUserById(id);
     }
 }
 

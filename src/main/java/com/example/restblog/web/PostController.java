@@ -42,8 +42,12 @@ public class PostController{
 
     @PostMapping
     public void createPost(@RequestBody Post postToAdd) {
-        userService.addPost(postToAdd);
         System.out.println(postToAdd);
+    }
+
+    @PostMapping("{username}")
+    public void createByUsername(@PathVariable String username, @RequestBody Post newPost){
+        userService.addPost(newPost, username);
     }
 
 //    @PostMapping("")

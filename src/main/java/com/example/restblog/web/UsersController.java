@@ -1,6 +1,7 @@
 package com.example.restblog.web;
 
 
+import com.example.restblog.Services.EmailService;
 import com.example.restblog.Services.UserService;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
@@ -15,9 +16,11 @@ import java.util.List;
 public class UsersController {
 
     private final UserService userService;
+    private final EmailService emailService;
 
-    public UsersController(UserService userService) {
+    public UsersController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 //works
     @GetMapping
@@ -53,6 +56,16 @@ public class UsersController {
     @PutMapping("{id}/updatePassword")
     public void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
         userService.updateUserPassword(id, newPassword);
+    }
+//works
+    @PutMapping("{id}/updateUserName")
+    public void updateUser(@PathVariable Long id, String userName) {
+        userService.updateUserName(id, userName);
+    }
+
+    @PutMapping("{id}/updateEmail")
+    public void updateEmail(@PathVariable Long id, String email) {
+        userService.updateEmail(id, email);
     }
 
 

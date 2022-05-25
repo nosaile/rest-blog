@@ -1,6 +1,9 @@
 body{
-    margin: 25px;
-    background-color: wheat;
+    background-color: lightskyblue;
     text-align: center;
+}
+
+main{
+    margin: 2rem;
 }
 

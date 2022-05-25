@@ -86,6 +86,18 @@ public class UserService {
 
     }
 //works
+    public void updateUserName(long id, String newUserName) {
+        User setUsername = usersRepository.findById(id);
+        setUsername.setUsername(newUserName);
+        usersRepository.save(setUsername);
+    }
+
+    public void updateEmail(long id, String email){
+        User setNewEmail = usersRepository.findById(id);
+        setNewEmail.setEmail(email);
+        usersRepository.save(setNewEmail);
+    }
+//works
     public void deletePostById(long id) {
         // TODO: change old code to postsRepository.deleteById(id)
         postsRepository.deleteById(id);

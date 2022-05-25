@@ -1,5 +1,6 @@
 package com.example.restblog.web;
 
+import com.example.restblog.Services.EmailService;
 import com.example.restblog.data.Post;
 import com.example.restblog.Services.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +13,13 @@ import java.util.Objects;
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostController {
 
-    // TODO: see UsersController for the "why" of this
     private final UserService userService;
+    private final EmailService emailService;
 
-    public PostController(UserService userService){
+
+    public PostController(UserService userService, EmailService emailService){
         this.userService = userService;
+        this.emailService = emailService;
     }
 //works
     @GetMapping
@@ -38,6 +41,8 @@ public class PostController {
     @PostMapping("{username}")
     public void createByUsername(@PathVariable String username, @RequestBody Post newPost){
         userService.addPost(newPost, username);
+        emailService.prepareAndSend(newPost, newPost.getTitle(), newPost.getContent());
+
     }
 //works
     @PutMapping("{id}")

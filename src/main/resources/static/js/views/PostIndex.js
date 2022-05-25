@@ -19,9 +19,9 @@ export default function PostIndex(props) {
             </form>
 </div>
 <hr>
-            <div id="posts-container">
-            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-  <div class="card-header">${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3></div>
+            
+  ${props.posts.map(post => `<div class="card-header"><div id="posts-container">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;"><div><h3 id="post-title">${post.title}</h3></div>
   <div class="card-body">
     <p class="card-text"><p id="post-content">${post.content}</p></p>
   </div>
@@ -29,22 +29,20 @@ export default function PostIndex(props) {
   <button class="btn btn-success" type="button" id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button>
   <button class="btn btn-danger" type="button" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
 </div>
-</div>`).join('')}   
-            </div>
+</div>
+</div>  
+ </div>
+            `).join('')} 
             
         </main>
     `;
 }
-
-
-// PostsEvent();
 
 export function PostsEvent() {
     postEventListener();
     putEventListener();
     deleteEventListener();
 }
-
 
 function postEventListener() {
     $(document).on("click", '#submit-post', function () {

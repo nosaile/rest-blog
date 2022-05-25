@@ -4,24 +4,34 @@ export default function PostIndex(props) {
             <h1>Posts Page</h1>
         </header>
         <main>
-            <div id="posts-container">
-           
-                ${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3>
-<p id="post-content">${post.content}</p>
-<button style="background-color: cornflowerblue; color: WHITE" id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button>
-<button style="background-color: orangered; color: WHITE" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
-</div>`).join('')}   
-            </div>
-            <hr>
-            <div id="form-container">
-            <h1>New Post</h1>
+        <div id="form-container" class="newpostcontainer" >
+        <h1>New Post</h1>
             <form id="submit-form">
-            <input type="text" id="create-post-title" placeholder="Title">
-            <br>
-            <textarea placeholder="Content" id="create-post-content"></textarea>
+        <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Title</label>
+  <input type="text" id="create-post-title" class="form-control" placeholder="Title">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+  <textarea placeholder="Content" id="create-post-content" class="form-control"></textarea>
+</div>
             <button style="background-color: seagreen; color: WHITE" id="submit-post">submit</button>
             </form>
 </div>
+<hr>
+            <div id="posts-container">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">${props.posts.map(post => `<div><h3 id="post-title">${post.title}</h3></div>
+  <div class="card-body">
+    <p class="card-text"><p id="post-content">${post.content}</p></p>
+  </div>
+           <div class="d-grid gap-2 d-md-block">
+  <button class="btn btn-success" type="button" id="edit-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">edit</button>
+  <button class="btn btn-danger" type="button" id="delete-post" data-id="${post.id}" data-title="${post.title}" data-content="${post.content}">delete</button>
+</div>
+</div>`).join('')}   
+            </div>
+            
         </main>
     `;
 }

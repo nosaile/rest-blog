@@ -41,7 +41,7 @@ public class PostController {
     @PostMapping("{username}")
     public void createByUsername(@PathVariable String username, @RequestBody Post newPost){
         userService.addPost(newPost, username);
-        emailService.prepareAndSend(newPost, newPost.getTitle(), newPost.getContent());
+        emailService.prepareAndSend(newPost, "New post created.","Here is your new post: " + newPost.getContent());
 
     }
 //works

@@ -1,84 +1,99 @@
 package com.example.restblog.Services;
 
-import com.example.restblog.data.Post;
-import com.example.restblog.data.PostsRepository;
-import com.example.restblog.data.User;
-import com.example.restblog.data.UsersRepository;
+
+import com.example.restblog.data.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
 
-    public final PostsRepository postsRepository;
-    public final UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
+    private final PostsRepository postsRepository;
+    private final CategoriesRepository categoriesRepository;
 
-    public UserService(UsersRepository usersRepository, PostsRepository postsRepository) {
+    public UserService(UsersRepository usersRepository, PostsRepository postsRepository, CategoriesRepository categoriesRepository) {
         this.usersRepository = usersRepository;
         this.postsRepository = postsRepository;
+        this.categoriesRepository = categoriesRepository;
     }
-
-    public List<User> getUserList() {
+//works
+    public List<User> getAllUsers() {
         return usersRepository.findAll();
     }
-
-    public List<Post> getPostList() {
+//works
+    public List<Post> getAllPosts() {
         return postsRepository.findAll();
     }
-
+//works if you manually input a password field on swagger, not sure why yet
+    public void addUser(User newUser){
+        usersRepository.save(newUser);
+    }
+//works
     public void addPost(Post newPost, String username) {
         User user = getUserByUsername(username);
         user.getPosts().add(newPost);
         newPost.setUser(user);
+        List<Category> categoriesToAdd = new ArrayList<>();
+        for (Category category : newPost.getCategories()) {
+            categoriesToAdd.add(categoriesRepository.findCategoryByName(category.getName()));
+        }
+        newPost.setCategories(categoriesToAdd);
         postsRepository.save(newPost);
     }
-
+//works
     public User getUserById(Long id) {
         return usersRepository.findById(id).orElseThrow();
     }
-
+//works
     public User getUserByUsername(String username) {
+
         return usersRepository.findByUsername(username);
     }
-
-    public User getUserByEmail(String email) {
+//works
+    public User getUserByEmail(String email){
         return usersRepository.findByEmail(email);
     }
+//works
+    public Post getPostById(long id){
+        for (Post post : postsRepository.findAll()) {
+            if (Objects.equals(post.getId(), id)) {
+                return post;
+            }
+        }
+       return postsRepository.getById(id);
+    }
+//works
+    public void updatePost(long postId, Post post) {
+        Post postToUpdate = postsRepository.findById(postId).orElseThrow();
+        if (post.getContent() != null && !post.getContent().isEmpty()) {
+            postToUpdate.setContent(post.getContent());
+        }
+        if (post.getTitle() != null && !post.getTitle().isEmpty()) {
+            postToUpdate.setTitle(post.getTitle());
+        }
 
+        postsRepository.save(postToUpdate);
+    }
+//works
+    public void updateUserPassword(long id, String newPassword){
+       User setNewPass = usersRepository.findById(id);
+       setNewPass.setPassword(newPassword);
+       usersRepository.save(setNewPass);
+
+    }
+//works
     public void deletePostById(long id) {
+        // TODO: change old code to postsRepository.deleteById(id)
         postsRepository.deleteById(id);
-
     }
-
-    public void deleteUserById(long id) {
-usersRepository.deleteById(id);
+//works
+    public List<Post> getPostsByTitleKeyword(String keyword) {
+        return postsRepository.searchByTitleLike(keyword);
     }
-
-//    public List<User> setUserList() {
-//        List<User> userList = new ArrayList<>();
-//        userList.add(new User(1L, "nosaile", "1email@web.com", "pass1"));
-//        userList.add(new User(2L, "sirhc", "2email@web.com", "pass2"));
-//        userList.add(new User(3L, "topherson", "3email@web.com", "pass3"));
-//        userList.add(new User(4L, "player1", "4email@web.com", "pass4"));
-//        userList.add(new User(5L, "player2", "5email@web.com", "pass5"));
-//        userList.add(new User(6L, "player3", "6email@web.com", "pass6"));
-//
-//        return userList;
-//    }
-
-//    private List<Post> setPostList() {
-//        List<Post> postList = new ArrayList<>();
-//        postList.add(new Post(1L, "posty post", "im the content for posty post"));
-//        postList.add(new Post(2L, "spicy", "the spicy post"));
-//        postList.add(new Post(3L, "post3", "im the 3rd post"));
-//        postList.add(new Post(4L, "Title", "Content"));
-//        postList.add(new Post(5L, "Generic", "generic content in here"));
-//        postList.add(new Post(6L, "New Posting", "im brand a new post look at me"));
-//        postList.add(new Post(7L, "post7", "im the 7th post"));
-//        postList.add(new Post(8L, "Testing", "im a test post"));
-//
-//        return postList;
-//    }
 
 }
+

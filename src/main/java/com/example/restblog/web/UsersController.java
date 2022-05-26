@@ -22,52 +22,60 @@ public class UsersController {
         this.userService = userService;
         this.emailService = emailService;
     }
-//works
+
+    //works
     @GetMapping
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userService.getAllUsers();
     }
-//works
+
+    //works
     @GetMapping("{id}")
-    public User getById(@PathVariable long id){
+    public User getById(@PathVariable long id) {
         return userService.getUserById(id);
     }
-//rn I have to manually input a password field on swagger, not sure why yet
+
+    //rn I have to manually input a password field on swagger, not sure why yet
     @PostMapping
-    public void create(@RequestBody User newUser){
+    public void create(@RequestBody User newUser) {
         userService.addUser(newUser);
     }
-//works
+
+    //works
     @PostMapping("{username}")
-    public void addUserPost(@PathVariable String username, @RequestBody Post newPost){
+    public void addUserPost(@PathVariable String username, @RequestBody Post newPost) {
         userService.addPost(newPost, username);
     }
-//works
+
+    //works
     @GetMapping("username")
     public User getByUsername(@RequestParam String username) {
         return userService.getUserByUsername(username);
     }
-//works
+
+    //works
     @GetMapping("email")
     public User getByEmail(@RequestParam String email) {
         return userService.getUserByEmail(email);
     }
-//works
+
+    //works
     @PutMapping("{id}/updatePassword")
     public void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
         userService.updateUserPassword(id, newPassword);
     }
-//works
+
+    //works
     @PutMapping("{id}/updateUserName")
     public void updateUser(@PathVariable Long id, String userName) {
         userService.updateUserName(id, userName);
     }
 
+    //works
     @PutMapping("{id}/updateEmail")
     public void updateEmail(@PathVariable Long id, String email) {
         userService.updateEmail(id, email);
     }
-
 
 
 }

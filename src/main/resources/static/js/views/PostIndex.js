@@ -15,7 +15,7 @@ export default function PostIndex(props) {
   <label for="exampleFormControlTextarea1" class="form-label">Content</label>
   <textarea placeholder="Content" id="create-post-content" class="form-control"></textarea>
 </div>
-            <button style="background-color: seagreen; color: WHITE" id="submit-post">submit</button>
+            <button class="btn btn-success" type="button" id="submit-post">submit</button>
             </form>
 </div>
 <hr>

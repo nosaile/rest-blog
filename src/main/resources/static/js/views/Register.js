@@ -20,7 +20,7 @@ export default function Register(props) {
     <label for="password">Password</label>
     <input id="password" name="password" type="password"/>
     <hr>
-    <input style="background-color: green; color: white" id="register-btn" type="submit" value="Register"/>
+    <button class="btn btn-success" type="submit" id="register-btn">Login</button>
 </form>
 </body>
 </html>`;

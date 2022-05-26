@@ -2,6 +2,8 @@ package com.example.restblog.Services;
 
 
 import com.example.restblog.data.*;
+import com.example.restblog.dto.CreateUserDto;
+import com.example.restblog.dto.UpdateUserDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,9 +28,9 @@ public class UserService {
     }
 
     //works if you manually input a password field on swagger, not sure why yet
-    public void addUser(User newUser) {
-        usersRepository.save(newUser);
-    }
+//    public void addUser(User newUser) {
+//        usersRepository.save(newUser);
+//    }
 
     //works
     public void addPost(Post newPost, String username) {
@@ -75,10 +77,27 @@ public class UserService {
         usersRepository.save(setUsername);
     }
 
+    //works
     public void updateEmail(long id, String email) {
         User setNewEmail = usersRepository.findById(id);
         setNewEmail.setEmail(email);
         usersRepository.save(setNewEmail);
+    }
+
+    public void updateUser(UpdateUserDto updateUserDto) {
+        User user = usersRepository.findById(updateUserDto.getId());
+
+        if (updateUserDto.getUsername() != null && !updateUserDto.getUsername().isEmpty()) {
+            user.setUsername(updateUserDto.getUsername());
+        }
+        if (updateUserDto.getEmail() != null && !updateUserDto.getEmail().isEmpty()) {
+            user.setEmail(updateUserDto.getEmail());
+        }
+        usersRepository.save(user);
+    }
+
+    public void createUser(CreateUserDto createUserDto) {
+        usersRepository.save(new User(createUserDto.getUsername(), createUserDto.getEmail(), createUserDto.getPassword()));
     }
 
 }

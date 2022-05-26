@@ -5,6 +5,8 @@ import com.example.restblog.Services.EmailService;
 import com.example.restblog.Services.UserService;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
+import com.example.restblog.dto.CreateUserDto;
+import com.example.restblog.dto.UpdateUserDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +28,7 @@ public class UsersController {
     //works
     @GetMapping
     public List<User> getAll() {
-        return userService.getAllUsers();
+        return  userService.getAllUsers();
     }
 
     //works
@@ -37,8 +39,9 @@ public class UsersController {
 
     //rn I have to manually input a password field on swagger, not sure why yet
     @PostMapping
-    public void create(@RequestBody User newUser) {
-        userService.addUser(newUser);
+    public void create(@RequestBody CreateUserDto createUserDto) {
+        System.out.println(createUserDto);
+        userService.createUser(createUserDto);
     }
 
     //works
@@ -75,6 +78,12 @@ public class UsersController {
     @PutMapping("{id}/updateEmail")
     public void updateEmail(@PathVariable Long id, String email) {
         userService.updateEmail(id, email);
+    }
+
+    @PutMapping
+    public void update(@RequestBody UpdateUserDto updateUserDto){
+        userService.updateUser(updateUserDto);
+        System.out.println(updateUserDto);
     }
 
 
